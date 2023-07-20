@@ -50,15 +50,45 @@ def add():
     surname = input("|\n| Введите фамилию: ")
     phone = input("|\n| Введите номер телефона: ")  # При необходимости можно добавить проверку на телефон с помощью регулярных выражений
     city = input("|\n| Введите город: ")
+
+    # ---------- первый вариант ------------
+    # var = int(input(f"В каком формате Вы хотите записать данные?\n\n"
+    #                 f"1 Вариант:\n\n"
+    #                 f"{surname},{name},{phone},{city}\n\n"
+    #                 f"2 Вариант:\n\n"
+    #                 f"{surname};{name};{phone};{city}\n\n"
+    #                 f"Выберите номер варианта: "))
+
+    # while var != 1 and var != 2:
+    #     print('Ты дурак?! Даю тебе последний шанс')
+    #     var = int(input("Введите номер варианта: "))
+
+    # with open(f'db/data{answer}.txt', 'r', encoding='utf-8') as file:
+    #     data = file.readlines()
+    #     if data:
+    #         number = int(data[-1].split(';')[0])
+    #     else:
+    #         number = 0
+
+    # if var == 1:
+    #     with open(f'db/data{answer}.txt', 'a', encoding='utf-8') as file:
+    #         file.write(f'{number + 1},{name},{surname},{phone},{city}\n\n')
+    # else:
+    #     with open(f'db/data{answer}.txt', 'a', encoding='utf-8') as file:
+    #         file.write(f'{number + 1};{name};{surname};{phone};{city}\n')
+    # --------------------------------------------------------------------
+
+    # ------------- второй вариант ---------------
     with open(f'db/data{answer}.txt', 'r', encoding='utf-8') as file:
         data = file.readlines()
+        sep = input('Выверите формат сохранения (",", "-", "."): ')
         if data:
-            number = int(data[-1].split(';')[0])
+            number = int(data[-1].split(";")[0])
         else:
             number = 0
     with open(f'db/data{answer}.txt', 'w', encoding='utf-8') as file:
-        file.writelines(data + [f'{number + 1};{name};{surname};{phone};{city}'])
-
+        file.writelines(data + [f'{number + 1}{sep}{name}{sep}{surname}{sep}{phone}{sep}{city}'])
+    # -----------------------------------------------
     print('___________________________\n'
           'Данные успешно записаны!')
 
